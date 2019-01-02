@@ -52,77 +52,77 @@
                     index: 'monitor',
                     title: '大屏监控',
                 },
-                {
-                    icon: 'fontfamily te-oa-shujuguanli',
-                    index: '3',
-                    title: '数据管理',
-                    subs: [
-                        {
-                            index: 'oacustomer2',
-                            title: '客户人数',
-                            power: power.oacustomer2
-                        },
-                        {
-                            index: 'achievement2',
-                            title: '员工绩效',
-                            power: power.achievement2
-
-                        },
-                        {
-                            index: 'profits2',
-                            title: '股东管理',
-                            power: power.profits2
-
-                        },
-                        {
-                            index: 'money',
-                            title: '新建转账',
-                            power: power.money,
-
-                        },
-                        {
-                            index: 'devices2',
-                            title: '设备管理',
-                            power: power.devices2,
-
-                        },
-                        {
-                            index: 'devicestate',
-                            title: '设备推广',
-                            power: power.devicestate,
-                        },
-                        {
-                            index: 'groupmanagement',
-                            title: '分组管理',
-                            power: power.groupmanagement,
-                        },
-                        {
-                            index: 'accountoutput',
-                            title: '账号产出',
-                            power: power.accountoutput,
-                        },
-                    ]
-                },
-                {
-                    icon: 'fontfamily te-oa-quanxian',
-                    index: 'manage',
-                    title: '用户管理',
-                    power: power.manage
-                },
-                {
-                    icon: 'fontfamily te-oa-rizhi',
-                    index: 'operationlog',
-                    title: '操作日志',
-                    power: power.operationlog,
-
-                },
-                {
-                    icon: 'fontfamily te-oa-rizhi',
-                    index: '403',
-                    title: '更新日志',
-                    power: true,
-
-                },
+                // {
+                //     icon: 'fontfamily te-oa-shujuguanli',
+                //     index: '3',
+                //     title: '数据管理',
+                //     subs: [
+                //         {
+                //             index: 'oacustomer2',
+                //             title: '客户人数',
+                //             power: power.oacustomer2
+                //         },
+                //         {
+                //             index: 'achievement2',
+                //             title: '员工绩效',
+                //             power: power.achievement2
+                //
+                //         },
+                //         {
+                //             index: 'profits2',
+                //             title: '股东管理',
+                //             power: power.profits2
+                //
+                //         },
+                //         {
+                //             index: 'money',
+                //             title: '新建转账',
+                //             power: power.money,
+                //
+                //         },
+                //         {
+                //             index: 'devices2',
+                //             title: '设备管理',
+                //             power: power.devices2,
+                //
+                //         },
+                //         {
+                //             index: 'devicestate',
+                //             title: '设备推广',
+                //             power: power.devicestate,
+                //         },
+                //         {
+                //             index: 'groupmanagement',
+                //             title: '分组管理',
+                //             power: power.groupmanagement,
+                //         },
+                //         {
+                //             index: 'accountoutput',
+                //             title: '账号产出',
+                //             power: power.accountoutput,
+                //         },
+                //     ]
+                // },
+                // {
+                //     icon: 'fontfamily te-oa-quanxian',
+                //     index: 'manage',
+                //     title: '用户管理',
+                //     power: power.manage
+                // },
+                // {
+                //     icon: 'fontfamily te-oa-rizhi',
+                //     index: 'operationlog',
+                //     title: '操作日志',
+                //     power: power.operationlog,
+                //
+                // },
+                // {
+                //     icon: 'fontfamily te-oa-rizhi',
+                //     index: '403',
+                //     title: '更新日志',
+                //     power: true,
+                //
+                // },
             ];
             // if(!power.datastatistics1 && !power.daydata1 && !power.oacustomer1 && !power.order1 && !power.achievement1 && !power.profits1 && !power.moneylog1 && !power.devices1){
             //     item.splice(0,1);
@@ -134,7 +134,6 @@
             //         item.splice(1,1);
             //     };
             // };
-            console.log(item);
             this.items =item;
         },
     }

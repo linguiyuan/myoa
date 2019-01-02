@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import qs from 'qs'
 import "babel-polyfill";
+import i18n from './i18n/i18n';
 import vfilters from './components/common/vfilters'
 Vue.use(ElementUI, { size: 'small' });
 //http请求配置
@@ -105,16 +106,17 @@ for(let key in vfilters){
     Vue.filter(key,vfilters[key]);
 }
 //使用钩子函数对路由进行权限跳转
-// router.beforeEach((to, from, next) => {
-//     let token = sessionStorage.getItem('token');
-//     if(!token && to.path !== '/login'){
-//         next('/login');
-//     }else {
-//         next();
-//     }
-// })
+router.beforeEach((to, from, next) => {
+    let token = sessionStorage.getItem('token');
+    if(!token && to.path !== '/login'){
+        next('/login');
+    }else {
+        next();
+    }
+})
 
 new Vue({
     router,
+    i18n,
     render: h => h(App)
 }).$mount('#app');
