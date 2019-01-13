@@ -11,6 +11,9 @@ import i18n from './i18n/i18n';
 import vfilters from './components/common/vfilters'
 Vue.use(ElementUI, { size: 'small' });
 //http请求配置
+Vue.use(VueBaiduMap.default, {
+    ak: 'YOUR_APP_KEY'
+});
 axios.defaults.withCredentials=true;
 axios.defaults.headers={
     "Content-Type": "application/json"

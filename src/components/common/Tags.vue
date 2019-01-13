@@ -1,23 +1,31 @@
 <template>
-    <div class="tags" v-if="showTags">
-        <ul>
-            <li class="tags-li" v-for="(item,index) in tagsList" :class="{'active': isActive(item.path)}" :key="index">
-                <router-link :to="item.path" class="tags-li-title">
-                    {{item.title}}
-                </router-link>
-                <span class="tags-li-icon" @click="closeTags(index)"><i class="el-icon-close"></i></span>
-            </li>
-        </ul>
-        <div class="tags-close-box">
-            <el-dropdown @command="handleTags">
-                <el-button size="mini" type="primary">
-                    标签选项<i class="el-icon-arrow-down el-icon--right"></i>
-                </el-button>
-                <el-dropdown-menu size="small" slot="dropdown">
-                    <el-dropdown-item command="other">关闭其他</el-dropdown-item>
-                    <el-dropdown-item command="all">关闭所有</el-dropdown-item>
-                </el-dropdown-menu>
-            </el-dropdown>
+    <div id="tags">
+        <div class="tags" v-if="showTags">
+            <ul>
+                <li class="tags-li" v-for="(item,index) in tagsList" :class="{'active': isActive(item.path)}"
+                    :key="index">
+                    <router-link :to="item.path" class="tags-li-title">
+                        {{item.title}}
+                    </router-link>
+                    <span class="tags-li-icon" @click="closeTags(index)"><i class="el-icon-close"></i></span>
+                </li>
+            </ul>
+            <div class="tags-close-box">
+                <el-dropdown @command="handleTags">
+                    <el-button size="mini" type="primary">
+                        标签选项<i class="el-icon-arrow-down el-icon--right"></i>
+                    </el-button>
+                    <el-dropdown-menu size="small" slot="dropdown">
+                        <el-dropdown-item command="other">关闭其他</el-dropdown-item>
+                        <!--<el-dropdown-item command="all">关闭所有</el-dropdown-item>-->
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </div>
+        </div>
+        <div class="position">
+           <div class="tag_text">
+                <i class="el-icon-location-outline"></i>{{position}}
+           </div>
         </div>
     </div>
 </template>
@@ -27,7 +35,8 @@
     export default {
         data() {
             return {
-                tagsList: []
+                tagsList: [],
+                position:''
             }
         },
         methods: {
@@ -40,24 +49,24 @@
                 const item = this.tagsList[index] ? this.tagsList[index] : this.tagsList[index - 1];
                 if (item) {
                     delItem.path === this.$route.fullPath && this.$router.push(item.path);
-                }else{
+                } else {
                     this.$router.push('/');
                 }
             },
             // 关闭全部标签
-            closeAll(){
+            closeAll() {
                 this.tagsList = [];
                 this.$router.push('/');
             },
             // 关闭其他标签
-            closeOther(){
+            closeOther() {
                 const curItem = this.tagsList.filter(item => {
                     return item.path === this.$route.fullPath;
                 })
                 this.tagsList = curItem;
             },
             // 设置标签
-            setTags(route){
+            setTags(route) {
                 const isExist = this.tagsList.some(item => {
                     return item.path === route.fullPath;
                 })
@@ -68,21 +77,25 @@
                 })
                 bus.$emit('tags', this.tagsList);
             },
-            handleTags(command){
+            handleTags(command) {
                 command === 'other' ? this.closeOther() : this.closeAll();
             }
         },
         computed: {
             showTags() {
                 return this.tagsList.length > 0;
-            }
+            },
         },
-        watch:{
-            $route(newValue, oldValue){
+        watch: {
+            $route(newValue, oldValue) {
                 this.setTags(newValue);
-            }
+            },
         },
-        created(){
+        created() {
+            this.position = this.$route.meta.position;
+            bus.$on('position', value => {
+                this.position = value;
+            });
             this.setTags(this.$route);
         }
     }
@@ -90,7 +103,26 @@
 </script>
 
 
-<style>
+<style lang='scss'>
+    #tags {
+        width: 100%;
+    }
+    .position {
+        height: 24px;
+        font-size: 14px;
+        color: #8f8f8f;
+        margin-top: 10px;
+        padding: 0px 20px;
+        line-height: 24px;
+    }
+    .tag_text{
+        height: 100%;
+        border-bottom: 1px solid #cccccc;
+        font-size: 12px;
+        i{
+            margin-right: 8px;
+        }
+    }
     .tags {
         position: relative;
         height: 30px;

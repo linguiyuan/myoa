@@ -36,6 +36,9 @@
         },
         computed: {
             onRoutes() {
+                if(typeof this.$route.path == 'string'){
+                    bus.$emit('position',this.$route.meta.position)
+                }
                 return this.$route.path.replace('/', '');
             }
         },
@@ -50,90 +53,82 @@
                 {
                     icon: 'fontfamily te-oa-icon-test',
                     index: 'monitor',
-                    title: '大屏监控',
+                    title: '实时监控',
                 },
-                // {
-                //     icon: 'fontfamily te-oa-shujuguanli',
-                //     index: '3',
-                //     title: '数据管理',
-                //     subs: [
-                //         {
-                //             index: 'oacustomer2',
-                //             title: '客户人数',
-                //             power: power.oacustomer2
-                //         },
-                //         {
-                //             index: 'achievement2',
-                //             title: '员工绩效',
-                //             power: power.achievement2
-                //
-                //         },
-                //         {
-                //             index: 'profits2',
-                //             title: '股东管理',
-                //             power: power.profits2
-                //
-                //         },
-                //         {
-                //             index: 'money',
-                //             title: '新建转账',
-                //             power: power.money,
-                //
-                //         },
-                //         {
-                //             index: 'devices2',
-                //             title: '设备管理',
-                //             power: power.devices2,
-                //
-                //         },
-                //         {
-                //             index: 'devicestate',
-                //             title: '设备推广',
-                //             power: power.devicestate,
-                //         },
-                //         {
-                //             index: 'groupmanagement',
-                //             title: '分组管理',
-                //             power: power.groupmanagement,
-                //         },
-                //         {
-                //             index: 'accountoutput',
-                //             title: '账号产出',
-                //             power: power.accountoutput,
-                //         },
-                //     ]
-                // },
-                // {
-                //     icon: 'fontfamily te-oa-quanxian',
-                //     index: 'manage',
-                //     title: '用户管理',
-                //     power: power.manage
-                // },
-                // {
-                //     icon: 'fontfamily te-oa-rizhi',
-                //     index: 'operationlog',
-                //     title: '操作日志',
-                //     power: power.operationlog,
-                //
-                // },
-                // {
-                //     icon: 'fontfamily te-oa-rizhi',
-                //     index: '403',
-                //     title: '更新日志',
-                //     power: true,
-                //
-                // },
+                {
+                    icon: 'fontfamily te-oa-shujuguanli',
+                    index: '1',
+                    title: '车辆与轮胎',
+                    subs: [
+                        {
+                            index: 'cars',
+                            title: '车辆管理',
+                        },
+                        {
+                            index: 'tires',
+                            title: '轮胎管理',
+                        },
+                    ]
+                },
+                {
+                    icon: 'fontfamily te-oa-shujuguanli',
+                    index: 'store',
+                    title: '门店查询',
+                },
+                {
+                    icon: 'fontfamily te-oa-shujuguanli',
+                    index: 'statisticalreport',
+                    title: '统计报表',
+                },
+                {
+                    icon: 'fontfamily te-oa-shujuguanli',
+                    index: 'devicemanagement',
+                    title: '设备管理',
+                },
+                {
+                    icon: 'fontfamily te-oa-shujuguanli',
+                    index: '6',
+                    title: '历史记录',
+                    subs:[
+                        {
+                            index:'tiresinfo',
+                            title: '胎温胎压',
+                        },
+                        {
+                            index:'alarmrecord',
+                            title: '报警记录',
+                        },
+                    ]
+                },
+                {
+                    icon: 'fontfamily te-oa-shujuguanli',
+                    index: '7',
+                    title: '系统管理',
+                    subs:[
+                        {
+                            index:'usercenter',
+                            title:'个人中心'
+                        },
+                        {
+                            index:'usermanagement',
+                            title:'用户管理'
+                        },
+                        {
+                            index:'systemparameter',
+                            title:'系统参数 '
+                        },
+                        {
+                            index:'operationlog',
+                            title:'操作日志 '
+                        },
+                        {
+                            index:'devicelog',
+                            title:'设备日志 '
+                        },
+                    ]
+                }
+
             ];
-            // if(!power.datastatistics1 && !power.daydata1 && !power.oacustomer1 && !power.order1 && !power.achievement1 && !power.profits1 && !power.moneylog1 && !power.devices1){
-            //     item.splice(0,1);
-            //     if(!power.oacustomer2 && !power.order2 && !power.achievement2 && !power.profits2 && !power.money && !power.devices2){
-            //         item.splice(0,1);
-            //     };
-            // }else {
-            //     if(!power.oacustomer2 && !power.order2 && !power.achievement2 && !power.profits2 && !power.money && !power.devices2){
-            //         item.splice(1,1);
-            //     };
-            // };
             this.items =item;
         },
     }

@@ -7,10 +7,10 @@
             <div class='ms-login' v-loading="loading">
                 <el-form :model="ruleForm" :rules="{
                     username: [
-                        { required: true, message: $t('message.loginPage.inputTip1')}
+                        { required: true, message: $t('message.loginPage.inputTip1'),trigger: 'blur'}
                     ],
                     password: [
-                        { required: true, message: $t('message.loginPage.inputTip2')}
+                        { required: true, message: $t('message.loginPage.inputTip2'),trigger: 'blur'}
                     ]
                 }" ref="ruleForm" label-width="0px" class="demo-ruleForm">
                     <el-form-item prop="username">

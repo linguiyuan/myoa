@@ -34,7 +34,7 @@ a {
 
 .content {
     width: auto;
-    padding: 20px;
+    padding: 15px;
     height: 100%;
 }
 
@@ -167,17 +167,6 @@ a {
 
 .v-note-wrapper .v-note-panel {
     min-height: 500px;
-}
-
-.position {
-    height: 24px;
-    font-size: 14px;
-    color: #8f8f8f;
-    border-bottom: 1px solid #8f8f8f;
-    margin-bottom: 16px;
-}
-.position i{
-    margin-right: 4px;
 }
 .my_wap{
     overflow: auto !important;

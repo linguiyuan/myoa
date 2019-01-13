@@ -17,12 +17,67 @@ export default new Router({
                 {
                     path: '/monitor',
                     component: resolve => require(['../components/page/viewData/monitor.vue'], resolve),
-                    meta: { title: '大屏监控' }
+                    meta: { title: '实时监控' ,position:'实时监控'},
                 },
                 {
-                    path: '/daydata1',
-                    component: resolve => require(['../components/page/viewData/dayData1.vue'], resolve),
-                    meta: { title: '每日数据1' }
+                    path: '/cars',
+                    component: resolve => require(['../components/page/viewData/cars.vue'], resolve),
+                    meta: { title: '车辆管理' ,position:'车辆与轮胎 > 车辆管理'},
+                },
+                {
+                    path: '/tires',
+                    component: resolve => require(['../components/page/viewData/tires.vue'], resolve),
+                    meta: { title: '轮胎管理' ,position:'车辆与轮胎 > 轮胎管理'},
+                },
+                {
+                    path: '/store',
+                    component: resolve => require(['../components/page/viewData/store.vue'], resolve),
+                    meta: { title: '门店查询' ,position:'门店查询'},
+                },
+                {
+                    path: '/statisticalreport',
+                    component: resolve => require(['../components/page/viewData/statisticalreport.vue'], resolve),
+                    meta: { title: '统计报表' ,position:'统计报表'},
+                },
+                {
+                    path: '/devicemanagement',
+                    component: resolve => require(['../components/page/viewData/devicemanagement.vue'], resolve),
+                    meta: { title: '设备管理' ,position:'设备管理'},
+                },
+                {
+                    path: '/tiresinfo',
+                    component: resolve => require(['../components/page/viewData/tiresinfo.vue'], resolve),
+                    meta: { title: '胎温胎压' ,position:'历史记录 > 胎温胎压'},
+                },
+                {
+                    path: '/alarmrecord',
+                    component: resolve => require(['../components/page/viewData/alarmrecord.vue'], resolve),
+                    meta: { title: '报警记录' ,position:'历史记录 > 报警记录'},
+                },
+                {
+                    path: '/usercenter',
+                    component: resolve => require(['../components/page/viewData/usercenter.vue'], resolve),
+                    meta: { title: '用户中心' ,position:'系统管理 > 用户中心'},
+                },
+                {
+                    path: '/usermanagement',
+                    component: resolve => require(['../components/page/viewData/usermanagement.vue'], resolve),
+                    meta: { title: '用户管理' ,position:'系统管理 > 用户管理'},
+                },
+                {
+                    path: '/systemparameter',
+                    component: resolve => require(['../components/page/viewData/systemparameter.vue'], resolve),
+                    meta: { title: '系统参数' ,position:'系统管理 > 系统参数'},
+                },
+                {
+                    path: '/operationlog',
+                    component: resolve => require(['../components/page/viewData/operationlog.vue'], resolve),
+                    meta: { title: '操作日志' ,position:'系统管理 > 操作日志'},
+                },
+                {
+                    path: '/devicelog',
+                    component: resolve => require(['../components/page/viewData/devicelog.vue'], resolve),
+                    meta: { title: '设备日志' ,position:'系统管理 > 设备日志'},
                 },
                 // {
                 //     path: '/oacustomer1',
