@@ -1,15 +1,18 @@
 <template>
     <div class="wrapper">
         <v-head></v-head>
-        <v-sidebar></v-sidebar>
-        <div class="content-box" :class="{'content-collapse':collapse}">
-            <v-tags></v-tags>
-            <div class="content">
-                <transition name="move" mode="out-in">
-                    <keep-alive :include="tagsList">
-                        <router-view></router-view>
-                    </keep-alive>
-                </transition>
+        <div class="mainContent">
+            <v-sidebar></v-sidebar>
+            <!--<div class="content-box" :class="{'content-collapse':collapse}">-->
+            <div id="content-box" ref='contentBox' style="height: 600px">
+                <!--<v-tags></v-tags>-->
+                <div class="content">
+                    <transition name="move" mode="out-in">
+                        <keep-alive :include="tagsList">
+                            <router-view :myHeight='myh' v-bind:myheight='myh'></router-view>
+                        </keep-alive>
+                    </transition>
+                </div>
             </div>
         </div>
     </div>
@@ -23,8 +26,10 @@
     export default {
         data(){
             return {
-                tagsList: [],
-                collapse: false
+                tagsList: ['device'],
+                collapse: false,
+                winHeight:600,
+                myh:100,
             }
         },
         components:{
@@ -43,6 +48,31 @@
                 }
                 this.tagsList = arr;
             })
+        },
+        created(){
+            window.addEventListener('resize', this.getHeight);
+            this.getHeight()
+        },
+        destroyed(){
+            window.removeEventListener('resize', this.getHeight)
+        },
+        mounted(){
+            this.setHeight()
+        },
+        methods:{
+            getHeight(){
+                let winHeight;
+                if (window.innerWidth)
+                    winHeight = window.innerHeight;
+                else if ((document.body) && (document.body.clientHeight)) {
+                    winHeight = document.body.clientHeight;
+                };
+                this.winHeight = winHeight;
+                this.myh = this.winHeight-70-40;
+            },
+            setHeight(){
+                this.$refs.contentBox.style.height = (this.winHeight - 70) + 'px';
+            }
         }
     }
 </script>

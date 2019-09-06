@@ -1,3 +1,4 @@
+
 <template>
     <div class="sidebar">
         <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#324157"
@@ -31,15 +32,125 @@
         data() {
             return {
                 collapse: false,
-                items: []
             }
         },
         computed: {
             onRoutes() {
-                if(typeof this.$route.path == 'string'){
-                    bus.$emit('position',this.$route.meta.position)
+                // if(typeof this.$route.path == 'string'){
+                //     console.log(this.$route.meta.position);
+                //     bus.$emit('position',this.$route.meta.position)
+                // }
+                if(this.$route.path == '/devinfo'){
+                    return 'device';
+                }else {
+                    return this.$route.path.replace('/', '');
                 }
-                return this.$route.path.replace('/', '');
+            },
+            items(){
+                let arr = [
+                    {
+                        icon: 'myiconfont iconcheliangguanli',
+                        index: 'item',
+                        title: this.$t('message.sidebar.fleets'),
+                    },
+                    {
+                        icon: 'myiconfont iconshebeiguanli',
+                        index: 'device',
+                        title: this.$t('message.sidebar.devices'),
+                    },
+                    {
+                        icon: 'myiconfont iconluntai',
+                        index: '1',
+                        title: this.$t('message.sidebar.tiresManage'),
+                        subs:[
+                            {
+                                index: 'tyres',
+                                title: this.$t('message.sidebar.brand'),
+                            },
+                            {
+                                index:'tyrelist',
+                                title:this.$t('message.sidebar.tiresList')
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'myiconfont icontongji',
+                        index: '2',
+                        title: this.$t('message.sidebar.generalStatistics'),
+                        subs:[
+                            {
+                                index: 'mileage_st',
+                                title: this.$t('message.sidebar.kilometers1'),
+                            },
+                            {
+                                index:'mileage_detail',
+                                title:this.$t('message.sidebar.kilometers2')
+                            },
+                            {
+                                index:'alarm_st',
+                                title:this.$t('message.sidebar.alarmsStatistics')
+                            },
+                            {
+                                index:'anomalous',
+                                title:this.$t('message.sidebar.abnormal')
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'myiconfont iconbaojing',
+                        index: 'alarm',
+                        title: this.$t('message.sidebar.alarmsManagement'),
+
+                    },
+                    {
+                        icon: 'myiconfont iconzhanghaoguanli',
+                        index: 'usercenter',
+                        title: this.$t('message.sidebar.accountsManagement'),
+                    }
+
+                ]
+                if(sessionStorage.getItem('usertype') == 100){
+                    arr.push({
+                        icon: 'myiconfont iconxitongguanli',
+                        index: '3',
+                        title: this.$t('message.sidebar.systemSetting'),
+                        subs:[
+                            {
+                                index: 'company',
+                                title: this.$t('message.sidebar.companyManagement'),
+                            },
+                            {
+                                index: 'device_warehousing',
+                                title: this.$t('message.sidebar.devicesRegistration'),
+                            },
+                            {
+                                index: 'dev_distribution',
+                                title: this.$t('message.sidebar.devicesAssign'),
+                            },
+                            {
+                                index: 'dev_del',
+                                title: this.$t('message.sidebar.clearData'),
+                            },
+                            {
+                                index: 'dev_revise',
+                                title: this.$t('message.sidebar.devicesCategorychange'),
+                            },
+                            {
+                                index:'setserver',
+                                title: this.$t('message.sidebar.setserver'),
+                            },
+                            {
+                                index:'remoteUpgrade',
+                                title: this.$t('message.sidebar.remoteUpgrade'),
+                            },
+                            {
+                                index:'devlog',
+                                title: this.$t('message.sidebar.devicesDiary'),
+                            },
+                        ]
+                    })
+                }
+                return arr
             }
         },
         created() {
@@ -48,100 +159,21 @@
                 this.collapse = msg;
             });
             // let power = JSON.parse(sessionStorage.getItem('auth'));
-            let power = {};
-            let item = [
-                {
-                    icon: 'fontfamily te-oa-icon-test',
-                    index: 'monitor',
-                    title: '实时监控',
-                },
-                {
-                    icon: 'fontfamily te-oa-shujuguanli',
-                    index: '1',
-                    title: '车辆与轮胎',
-                    subs: [
-                        {
-                            index: 'cars',
-                            title: '车辆管理',
-                        },
-                        {
-                            index: 'tires',
-                            title: '轮胎管理',
-                        },
-                    ]
-                },
-                {
-                    icon: 'fontfamily te-oa-shujuguanli',
-                    index: 'store',
-                    title: '门店查询',
-                },
-                {
-                    icon: 'fontfamily te-oa-shujuguanli',
-                    index: 'statisticalreport',
-                    title: '统计报表',
-                },
-                {
-                    icon: 'fontfamily te-oa-shujuguanli',
-                    index: 'devicemanagement',
-                    title: '设备管理',
-                },
-                {
-                    icon: 'fontfamily te-oa-shujuguanli',
-                    index: '6',
-                    title: '历史记录',
-                    subs:[
-                        {
-                            index:'tiresinfo',
-                            title: '胎温胎压',
-                        },
-                        {
-                            index:'alarmrecord',
-                            title: '报警记录',
-                        },
-                    ]
-                },
-                {
-                    icon: 'fontfamily te-oa-shujuguanli',
-                    index: '7',
-                    title: '系统管理',
-                    subs:[
-                        {
-                            index:'usercenter',
-                            title:'个人中心'
-                        },
-                        {
-                            index:'usermanagement',
-                            title:'用户管理'
-                        },
-                        {
-                            index:'systemparameter',
-                            title:'系统参数 '
-                        },
-                        {
-                            index:'operationlog',
-                            title:'操作日志 '
-                        },
-                        {
-                            index:'devicelog',
-                            title:'设备日志 '
-                        },
-                    ]
-                }
-
-            ];
-            this.items =item;
         },
     }
 </script>
 
-<style scoped>
+<style>
     .sidebar {
         display: block;
-        position: absolute;
-        left: 0;
-        top: 70px;
-        bottom: 0;
-        overflow-y: scroll;
+        min-width: 180px;
+        /*position: absolute;*/
+        /*left: 0;*/
+        /*top: 70px;*/
+        /*bottom: 0;*/
+        overflow-y: auto;
+        height: 100%;
+        z-index: 99;
     }
 
     .sidebar::-webkit-scrollbar {
@@ -149,10 +181,24 @@
     }
 
     .sidebar-el-menu:not(.el-menu--collapse) {
-        width: 170px;
+        min-width: 180px;
     }
 
     .sidebar > ul {
         height: 100%;
+        overflow-y: scroll;
+    }
+    .el-menu-item{
+        height: 48px;
+        line-height: 48px;
+        min-width: 100px !important;
+    }
+    .el-submenu__title{
+        height: 48px;
+        line-height: 48px;
+    }
+    .el-submenu .el-menu-item{
+        height: 40px;
+        line-height: 40px;
     }
 </style>

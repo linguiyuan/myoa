@@ -1,41 +1,21 @@
 <template>
     <div class="header">
-        <!-- 折叠按钮 -->
-        <div class="collapse-btn" @click="collapseChage">
-            <i class="el-icon-menu"></i>
-        </div>
-        <div class="logo">外部管理系统</div>
+        <div class="logo"><img src="../../../static/img/201902282302112.png" alt="" class='h_img'>{{name}}{{$t('message.ms')}}</div>
         <div class="header-right">
             <div class="header-user-con">
-                <!-- 全屏显示 -->
-                <!--<div class="btn-fullscreen" @click="handleFullScreen">-->
-                    <!--<el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">-->
-                        <!--<i class="el-icon-rank"></i>-->
-                    <!--</el-tooltip>-->
-                <!--</div>-->
-                <!-- 消息中心 -->
-                <!--<div class="btn-bell">-->
-                    <!--<el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">-->
-                        <!--<router-link to="/tabs">-->
-                            <!--<i class="el-icon-bell"></i>-->
-                        <!--</router-link>-->
-                    <!--</el-tooltip>-->
-                    <!--<span class="btn-bell-badge" v-if="message"></span>-->
-                <!--</div>-->
-                <!-- 用户头像 -->
-                <div class="user-avator"><img src="static/img/img.jpg"></div>
-                <!-- 用户名下拉菜单 -->
+                <el-select v-model="lang" @change='switchLanguage'>
+                    <el-option
+                        v-for="item in language"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
                         {{username}} <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <!--<a href="http://blog.gdfengshuo.com/about/" target="_blank">-->
-                            <!--<el-dropdown-item>关于作者</el-dropdown-item>-->
-                        <!--</a>-->
-                        <!--<a href="https://github.com/lin-xin/vue-manage-system" target="_blank">-->
-                            <!--<el-dropdown-item>项目仓库</el-dropdown-item>-->
-                        <!--</a>-->
                         <el-dropdown-item divided  command="usercenter">个人中心</el-dropdown-item>
                         <el-dropdown-item divided  command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
@@ -49,10 +29,22 @@
     export default {
         data() {
             return {
-                collapse: false,
+                collapse: true,
                 fullscreen: false,
-                name: '',
-                message: 2
+                name: 'userName ',
+                message: 2,
+                name:sessionStorage.getItem('companyname'),
+                language: [
+                    {
+                        value: "cn",
+                        label: "中文简体"
+                    },
+                    {
+                        value: "en",
+                        label: "English"
+                    },
+                ],
+                lang:sessionStorage.getItem('lang') || 'cn',
             }
         },
         computed:{
@@ -67,14 +59,19 @@
                 if(command == 'loginout'){
                     this.$router.push('/login');
                 }else if(command == 'usercenter'){
-                    this.$router.push('/usercenter');
+                    this.$router.push('/user');
                 }
             },
-            // 侧边栏折叠
-            collapseChage(){
-                this.collapse = !this.collapse;
-                bus.$emit('collapse', this.collapse);
+            //语言切换
+            switchLanguage(){
+                sessionStorage.setItem('lang',this.lang)
+                this.$i18n.locale=sessionStorage.getItem('lang');
             },
+            // 侧边栏折叠
+            // collapseChage(){
+            //     this.collapse = !this.collapse;
+            //     bus.$emit('collapse', this.collapse);
+            // },
             // 全屏事件
             // handleFullScreen(){
             //     let element = document.documentElement;
@@ -104,13 +101,13 @@
             // }
         },
         mounted(){
-            if(document.body.clientWidth < 1500){
-                this.collapseChage();
-            }
+            // if(document.body.clientWidth < 1500){
+            //     this.collapseChage();
+            // }
         }
     }
 </script>
-<style scoped>
+<style lang='scss'>
     .header {
         position: relative;
         box-sizing: border-box;
@@ -126,9 +123,17 @@
         line-height: 70px;
     }
     .header .logo{
+        display: flex;
+        justify-content: flex-start;
         float: left;
-        width:250px;
+        width:auto;
+        height: 70px;
+        overflow-y: hidden;
         line-height: 70px;
+        margin-left: 40px;
+    }
+    .h_img{
+        height: 70px;
     }
     .header-right{
         float: right;
@@ -138,6 +143,20 @@
         display: flex;
         height: 70px;
         align-items: center;
+        .el-input{
+            background-color: transparent;
+            width: 120px;
+            border: none;
+            margin-right: 30px;
+            color: #ffffff;
+            .el-input__inner{
+                width: 120px;
+                border:none;
+                background-color: transparent;
+                color: #ffffff;
+                font-size: 14px;
+            }
+        }
     }
     .btn-fullscreen{
         transform: rotate(45deg);
